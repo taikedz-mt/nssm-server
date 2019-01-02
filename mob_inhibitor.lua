@@ -8,7 +8,7 @@ Not in creative inventory, intended for admin use only.
 
 nssm_server = {}
 
-local inhibition_radius = tonumber(minetest.get("nssm.inhibition_radius")) or 8
+local inhibition_radius = tonumber(minetest.settings:get("nssm.inhibition_radius")) or 8
 
 minetest.register_privilege("mob_inhibitor", {description="Allows placing mob inhibitor blocks"})
 
