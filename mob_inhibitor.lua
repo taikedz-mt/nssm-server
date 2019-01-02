@@ -8,6 +8,8 @@ Not in creative inventory, intended for admin use only.
 
 nssm_server = {}
 
+local inhibition_radius = tonumber(minetest.get("nssm.inhibition_radius")) or 8
+
 minetest.register_privilege("mob_inhibitor", {description="Allows placing mob inhibitor blocks"})
 
 minetest.register_node("nssm_server:mob_inhibitor", {
@@ -61,7 +63,7 @@ function nssm_server:inhibit_effect(pos,radius)
 
     minetest.sound_play("nssm_inhibit", {
             pos = pos,
-            max_hear_distance = nssm.inhibition_radius,
+            max_hear_distance = inhibition_radius*2,
     })
 end
 
@@ -75,7 +77,7 @@ minetest.register_abm({
     action = function(pos, node, active_object_count, active_object_count_wider)
         local obj, istring, lua_entity
 
-        for _,obj in pairs(minetest.get_objects_inside_radius(pos , nssm.inhibition_radius)) do
+        for _,obj in pairs(minetest.get_objects_inside_radius(pos , inhibition_radius)) do
             if not obj:is_player() and obj:get_luaentity() then
                 lua_entity = obj:get_luaentity()
                 istring = lua_entity["name"]
