@@ -1,0 +1,6 @@
+License for Artistic Assets
+===========================
+
+* License for individual artistic contributions:
+    * Tai Kedzierski, CC-BY-SA 4.0
+        * `sounds/nssm_inhibit.*.ogg`
