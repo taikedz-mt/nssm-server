@@ -1,14 +1,24 @@
 --[[
 
-Server node tool to protect from mobs.
+Obliterate NSSM monsters that approach Mob Inhibitor nodes
 
-Not in creative inventory, intended for admin use only.
+By default, an admin-only inhibitor node is provided.
+
+Optionally, other nodes can benefit from the inhibition effect.
 
 --]]
 
 nssm_server = {}
 
 local inhibition_radius = tonumber(minetest.settings:get("nssm.inhibition_radius")) or 8
+
+-- Recommended --->   protector:protect,protector:protect2,cityblock:cityblock
+local inhibition_nodes = minetest.settings:get("nssm.inhibition_nodes") or ""
+
+inhibition_nodes = inhibition_nodes:split(",")
+
+-- Always include the inhibitor node
+inhibition_nodes[#inhibition_nodes+1] = "nssm:mob_inhibitor"
 
 minetest.register_privilege("mob_inhibitor", {description="Allows placing mob inhibitor blocks"})
 
@@ -70,7 +80,7 @@ end
 -- Inhibition block - place in spawn buildings on servers
 minetest.register_abm({
     label = "Monster Inhibition Block",
-    nodenames = {"nssm_server:mob_inhibitor"},
+    nodenames = inhibition_nodes,
     interval = 1,
     chance = 1,
     catch_up = false,
@@ -82,8 +92,8 @@ minetest.register_abm({
                 lua_entity = obj:get_luaentity()
                 istring = lua_entity["name"]
 
-                -- We got a name, it's nssm and it is a mob
-                if istring and istring:sub(1,5) == "nssm:" and lua_entity.health then
+                -- We got a name, it's nssm and it is monster mob
+                if istring and istring:sub(1,5) == "nssm:" and lua_entity.type == "monster" then
                     nssm_server:inhibit_effect(obj:get_pos())
                     obj:remove()
                 end
