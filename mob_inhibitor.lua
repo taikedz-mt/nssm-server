@@ -35,6 +35,7 @@ minetest.register_node("nssm_server:mob_inhibitor", {
     groups = {cracky = 1, level = 4, not_in_creative_inventory = 1},
     sounds = default.node_sound_stone_defaults(),
     drop = "",
+	on_blast = function() end,
     on_place = function(itemstack, placer, pointed_thing)
         local playername = placer:get_player_name()
         local privs = minetest.get_player_privs(playername)
