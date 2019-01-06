@@ -1,0 +1,6 @@
+# Smoke particles when fire is extenguished.
+# On servers, might add lag
+nssm_server.fire_smoke (Enable smoke around extinguishing fire) bool true
+
+nssm_server.inhibition_radius (Radius of effect for mob inhibition nodes) int 8
+nssm_server.inhibition_nodes (Itemstrings list of node that should inhibit mobs) string

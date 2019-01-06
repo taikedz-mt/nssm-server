@@ -10,10 +10,10 @@ Optionally, other nodes can benefit from the inhibition effect.
 
 nssm_server = {}
 
-local inhibition_radius = tonumber(minetest.settings:get("nssm.inhibition_radius")) or 8
+local inhibition_radius = tonumber(minetest.settings:get("nssm_server.inhibition_radius")) or 8
 
 -- Recommended --->   protector:protect,protector:protect2,cityblock:cityblock
-local inhibition_nodes = minetest.settings:get("nssm.inhibition_nodes") or ""
+local inhibition_nodes = minetest.settings:get("nssm_server.inhibition_nodes") or ""
 
 inhibition_nodes = inhibition_nodes:split(",")
 
